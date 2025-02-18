@@ -5804,9 +5804,16 @@ int CAABonderDlg::_getMTF(int Mode)
 	TSFRSpec m_stSFRSpec;
     for (j = 0; j < iCnt_Focus; j++)
     {
+
         if (j == 0) 
 		{
             bRtn = Task.getROI_SFR(Mode);				// 사각형 Box 위치 인식..
+			if (bRtn == false)
+			{
+				_stprintf_s(szLog, SIZE_OF_1K, _T("[SFR 측정] 원형 마크 인식 실패"));
+				errMsg2(Task.AutoFlag, szLog);
+				return -1;
+			}
 			for (i = 0; i < model.mGlobalSmallChartCount; i++)	//for (int i = 0; i < MTF_INSP_CNT; i++)
 			{
 				ptROICenter[i].x = Task.SFR._64_Sfr_Rect[i].left + (iSizeX / 2);
@@ -11959,16 +11966,16 @@ bool CAABonderDlg::func_MTF(BYTE* ChartRawImage, bool bAutoMode, int dindex)
     int sfrMax = m_pSFRProc->GetMaxResolutionCount();
     float sfrValue = 0.0;
 
-    //bool bRtn = Task.getROI_SFR(MTF_INSP);				// 사각형 Box 위치 인식..
-    //if (!bRtn)
-    //{
-    //    if (Task.AutoFlag == 1) {
-    //        saveInspImage(AA_CIRCLE_NG_IMAGE_SAVE, Task.m_iCnt_Step_AA_Total);
-    //    }
-    //    sLog.Format("[SFR 측정] 원형 마크 인식 실패");
-    //    errMsg2(Task.AutoFlag, sLog);
-    //    return -1;
-    //}
+    bool bRtn = Task.getROI_SFR(MTF_INSP);				// 사각형 Box 위치 인식..
+    if (!bRtn)
+    {
+        if (Task.AutoFlag == 1) {
+            saveInspImage(AA_CIRCLE_NG_IMAGE_SAVE, Task.m_iCnt_Step_AA_Total);
+        }
+        sLog.Format("[SFR 측정] 원형 마크 인식 실패");
+        errMsg2(Task.AutoFlag, sLog);
+        return -1;
+    }
 	double _offset = 0.0;
     for (int i = 0; i < sfrMax; i++)
     {

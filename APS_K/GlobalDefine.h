@@ -33,7 +33,8 @@
 #endif
 
 //=======================================================================
-#define					VER_STR		"231212_1_LENS AA"			//우승원 책임 BENZ_3M 원형 마크 없는 모델 빌드
+#define					VER_STR		"250218_1"			//원형마크 복구
+//#define					VER_STR		"231212_1_LENS AA"			//우승원 책임 BENZ_3M 원형 마크 없는 모델 빌드
 //#define					VER_STR		"230613_1_LENS AA"			//강상준 선임 원형마크없는 모델 빌드
 //#define					VER_STR		"230611_1_LENS AA"
 
